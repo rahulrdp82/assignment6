@@ -5,7 +5,7 @@ class FileUpload extends Component {
     super(props);
     this.state = {
       file: null,
-      jsonData: null,  // State to store the parsed data
+      jsonData: null,  
     };
   }
 
@@ -18,33 +18,33 @@ class FileUpload extends Component {
       reader.onload = (e) => {
         const text = e.target.result;
         const json = this.csvToJson(text);
-        this.setState({ jsonData: json });  // Set JSON data in state
-        this.props.set_data(json); // Call the set_data function passed from App.js
+        this.setState({ jsonData: json });  
+        this.props.set_data(json); 
       };
       reader.readAsText(file);
     }
   };
 
-  // Convert CSV to JSON format
+  
   csvToJson = (csv) => {
-    const lines = csv.split("\n");  // Split by newline for rows
-    const headers = lines[0].split(",");  // First line for headers
+    const lines = csv.split("\n"); 
+    const headers = lines[0].split(","); 
     const result = [];
 
-    // Loop through each line after headers
+
     for (let i = 1; i < lines.length; i++) {
-      const currentLine = lines[i].split(",");  // Split by comma for columns
+      const currentLine = lines[i].split(",");  
       const obj = {};
 
-      // Map each column value to the corresponding header
+      
       headers.forEach((header, index) => {
-        obj[header.trim()] = currentLine[index]?.trim();  // Trim spaces
+        obj[header.trim()] = currentLine[index]?.trim();  
       });
 
-      // If row is not empty, convert data types and add it to result
+      
       if (Object.keys(obj).length && lines[i].trim()) {
         const parsedObj = {
-          Date: new Date(obj.Date),  // Parse the date
+          Date: new Date(obj.Date),  
           'GPT-4': parseInt(obj['GPT-4'], 10),
           Gemini: parseInt(obj.Gemini, 10),
           'PaLM-2': parseInt(obj['PaLM-2'], 10),
