@@ -95,27 +95,26 @@ const Streamgraph = ({ data }) => {
         .style('fill', 'white');
     };
 
-    const margin = { top: 20, right: 200, bottom: 100, left: 50 }; // Increased bottom margin for x-axis
+    const margin = { top: 20, right: 200, bottom: 100, left: 50 }; 
     const width = 800 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
 
     const svg = d3
       .select(svgRef.current)
       .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom + 50); // Increased height to accommodate x-axis
-
+      .attr('height', height + margin.top + margin.bottom + 50); 
     svg.selectAll('*').remove();
 
     const chartArea = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Force the x-axis domain to span from January to December (even if data doesn't cover the entire year)
+    
     const x = d3
       .scaleTime()
-      .domain([new Date('2024-02-01'), new Date('2024-9-31')]) // Set the domain from January to December
+      .domain([new Date('2024-02-01'), new Date('2024-9-31')]) 
       .range([0, width])
-      .nice(d3.timeMonth); // Ensure months are aligned properly
+      .nice(d3.timeMonth); 
 
-    //console.log('X-axis domain:', [new Date('2024-01-01'), new Date('2024-12-31')]); // Debug: Check x-axis domain
+    
 
     const y = d3
       .scaleLinear()
@@ -171,7 +170,7 @@ const Streamgraph = ({ data }) => {
       .call(
         d3.axisBottom(x)
           .tickSize(10)
-          .tickFormat(d3.timeFormat('%b')) // Abbreviated month names
+          .tickFormat(d3.timeFormat('%b')) 
       )
       .selectAll('text')
       .style('fill', 'black');
