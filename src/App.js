@@ -4,18 +4,18 @@ import Streamgraph from './Streamgraph';
 import './App.css';
 
 const App = () => {
-  const [data, setData] = useState(null); // Store parsed data in state
+  const [data, setData] = useState(null); 
 
-  // Function to receive and store the data
+ 
   const handleData = (newData) => {
-    setData(newData); // Update state with new data
+    setData(newData); 
   };
 
   return (
     <div>
      
-      <FileUpload set_data={handleData} />  {/* Pass handleData as prop */}
-      {data && <Streamgraph data={data} />}  {/* Render Streamgraph when data is available */}
+      <FileUpload set_data={handleData} />  
+      {data && <Streamgraph data={data} />}
     </div>
   );
 };
